@@ -1,0 +1,1169 @@
+{
+	"info": {
+		"_postman_id": "203d9f54-6bc8-43e4-a439-9e0bdf361f86",
+		"name": "one forum API",
+		"description": "# oneForum API\n\nA online discussion forum.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "api/auth/register",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.collectionVariables.set(\"TOKEN\", pm.response.json().token);\r",
+									"pm.collectionVariables.set(\"LAST_USER_ID\", pm.response.json().user.uid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tester@email.com\",\r\n    \"password\": \"oneforum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/auth/login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"TOKEN\", pm.response.json().token);\r",
+									"pm.collectionVariables.set(\"LAST_USER_ID\", pm.response.json().user.uid);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"tester@email.com\",\r\n    \"password\": \"oneforum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/auth/user (PROTECTED)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/auth/user",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "api/user/{uid}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/user/3fa4205b-fcea-4e27-9aaf-c50838631400",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"3fa4205b-fcea-4e27-9aaf-c50838631400"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "topic",
+			"item": [
+				{
+					"name": "/api/topic/all",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/topic/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"topic",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/topic/page/0/size/2",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/topic/page/0/size/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"topic",
+								"page",
+								"0",
+								"size",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "question",
+			"item": [
+				{
+					"name": "/api/question/topic/{topicName}/all",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/topic/{{topicName}}/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"topic",
+								"{{topicName}}",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/topic/{topicName}/count",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/topic/{{topicName}}/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"topic",
+								"{{topicName}}",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/topic/{topicName}/page/{page}/size/{size}",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/topic/{{topicName}}/page/4/size/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"topic",
+								"{{topicName}}",
+								"page",
+								"4",
+								"size",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/question (PROTECTED)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"LAST_QUESTION_ID\", pm.response.json().qid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"How to learn js efficiently? suggeast some tricks\",\r\n    \"topicName\": \"e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/user/{userId}/all",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/user/{{LAST_USER_ID}}/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"user",
+								"{{LAST_USER_ID}}",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/user/{userId}/count",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/user/{{LAST_USER_ID}}/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"user",
+								"{{LAST_USER_ID}}",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/question/user/{{userId}}/page/0/size/1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/user/{{LAST_USER_ID}}/page/1/size/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"user",
+								"{{LAST_USER_ID}}",
+								"page",
+								"1",
+								"size",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/all (ALL)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/topic/{{topicName}}/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"topic",
+								"{{topicName}}",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/{qid} (SINGLE)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/{{LAST_QUESTION_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"{{LAST_QUESTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/page/{page}/size/{size} (ALL PAGED)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/question/topic/{{topicName}}/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"topic",
+								"{{topicName}}",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/question/{qid} (SINGLE)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/question/{{LAST_QUESTION_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"question",
+								"{{LAST_QUESTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.variables.set('topicName', 'e');"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "answer",
+			"item": [
+				{
+					"name": "/api/answer/{questionId}/all",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/answer/{{LAST_QUESTION_ID}}/all",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"answer",
+								"{{LAST_QUESTION_ID}}",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/answer/{questionId}/count",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/answer/{{LAST_QUESTION_ID}}/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"answer",
+								"{{LAST_QUESTION_ID}}",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/answer/{questionId}/page/0/size/1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/answer/{{LAST_QUESTION_ID}}/page/1/size/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"answer",
+								"{{LAST_QUESTION_ID}}",
+								"page",
+								"1",
+								"size",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/answer (PROTECTED)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"LAST_ANSWER_ID\", pm.response.json().aid);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"this is my answer 2\",\r\n    \"questionId\": \"{{LAST_QUESTION_ID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/answer",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/answer (PROTECTED) Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/answer/{{LAST_ANSWER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"answer",
+								"{{LAST_ANSWER_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vote",
+			"item": [
+				{
+					"name": "/api/vote/answer/{answerId} (PROTECTED)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vote/answer/{{LAST_ANSWER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vote",
+								"answer",
+								"{{LAST_ANSWER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/vote/answer/{answerId} (PROTECTED)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vote/answer/{{LAST_ANSWER_ID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vote",
+								"answer",
+								"{{LAST_ANSWER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/vote/answer/{answerId}/count",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/vote/answer/{{LAST_ANSWER_ID}}/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"vote",
+								"answer",
+								"{{LAST_ANSWER_ID}}",
+								"count"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "localhost:4012",
+			"type": "default"
+		},
+		{
+			"key": "PORT",
+			"value": "4012",
+			"type": "default"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "LAST_USER_ID",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "LAST_QUESTION_ID",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "LAST_ANSWER_ID",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
